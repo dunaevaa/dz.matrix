@@ -61,7 +61,7 @@ void menu(){
     cout << "8. Завершить работу программы" << endl;
 }
 
-void out(int**matrix, int m, int n){
+void out(int** matrix, int m, int n){
     for (int i=0; i<m; i++){
         for (int j=0; j<n; j++)
             cout << matrix[i][j] << " ";
@@ -131,7 +131,7 @@ void lff(int**& matrix, int &m, int &n)
         }
         matrix = new int*[m];
         for (i=0; i<m; i++)
-        c[i] = new int[n];
+        matrix[i] = new int[n];
         for (i=0; i<m; i++)
             for (j=0; j<n; j++)
             fin >> matrix[i][j];
@@ -158,9 +158,9 @@ int main (int argc, char* argv[]){
             break;
             case 2: add (matrix, m, n);
             break;
-            case 5: stf(matrix, m, n);
+            case 5: stf (matrix, m, n);
             break;
-	    case 6: lff(matrix, m, n);
+	    case 6: lff (matrix, m, n);
             break;
             case 8:
               return 0;
