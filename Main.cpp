@@ -75,7 +75,7 @@ void add(int**& matrix, int m, int n)
     for(i=0; i<m; i++){
         for(j=0; j<n; j++){
         cin >> matrix2;
-        c[i][j] = c[i][j] + matrix2; 
+        matrix[i][j] = matrix[i][j] + matrix2; 
 	}
     }
     cout << endl;
