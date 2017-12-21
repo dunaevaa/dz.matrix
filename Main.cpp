@@ -6,7 +6,7 @@
 #include<fstream>
 using namespace std;
 
-void cr(int**& matrix, int& m, int& n, int argc, char* argv[]){
+void cr(int**& matrix, int& m, int& n, int argc, char* argv[]) {
     int i, j, k;
     k = 2;
     string str1, str2;
@@ -21,28 +21,28 @@ void cr(int**& matrix, int& m, int& n, int argc, char* argv[]){
     matrix = new int *[m];
     for (i = 0; i<m; i++)
         matrix[i] = new int [n];
-    for (i = 0; i<m; i++)
-        for (j = 0; j<n; j++)
+    for (i=0; i<m; i++)
+        for (j=0; j<n; j++)
             matrix[i][j] = 0;
     if (argc == 3) {
 	string str3;
 	int z=0;
 	for (i=0; i<m; i++)
 		for (j=0; j<n; j++) {
-			for (; z < strlen(argv[2]); z++) {
+			for (z=0; z < strlen(argv[2]); z++) {
 				if (argv[2][z]>='0' && argv[2][z]<='9') {
 					str3 = argv[2][z];
 					matrix[i][j] = matrix[i][j]*10 + atoi(str3.c_str());
 				} else if (argv[2][z] == ',') {
 				    z++;
 				    break;
-				}
+				  }
 
 			}
 		}
-}
+   }
     for (i = 0; i<m; i++)
-        for (j = 0; j<n; j++, k++){
+        for (j = 0; j<n; j++, k++) {
             if (k < argc)
                 matrix[i][j] = atoi(argv[k]);
         }
@@ -61,56 +61,104 @@ void menu(){
     cout << "8. Завершить работу программы" << endl;
 }
 
-void out(int** matrix, int m, int n){
-    for (int i=0; i<m; i++){
+void out(int** matrix, int m, int n) {
+    for (int i=0; i<m; i++) {
         for (int j=0; j<n; j++)
             cout << matrix[i][j] << " ";
-        cout << endl;}
+        cout << endl;
+    }
 }
 
-void add(int**& matrix, int m, int n)
-{
-    int matrix2, i, j;
+void add(int**&matrix, int m, int n) {
+    int matrix1, i, j;
     cout << "Введите матрицу " << m << "x" << n << endl;
-    for(i=0; i<m; i++){
-        for(j=0; j<n; j++){
-        cin >> matrix2;
-        matrix[i][j] = matrix[i][j] + matrix2; 
+    for (i=0; i<m; i++) {
+        for (j=0; j<n; j++) {
+        cin >> matrix1;
+        matrix[i][j] = matrix[i][j] + matrix1; 
 	}
     }
     cout << endl;
-    for (i=0; i<m; i++){
-        for (j=0; j<n; j++){
+    for (i=0; i<m; i++) {
+        for (j=0; j<n; j++) {
         cout << matrix[i][j] << " ";
 	}
     cout << endl;
     }
 }
 
-void tran(int**& matrix, int &m, int &n)
+void mul(int**&matrix, int m, int n)
+{
+    int i, j, a, b, c;
+    string size, s1, s2;
+    cout << "Введите размер матрицы" << endl;
+    cin >> size;
+    for (i=0; (size[i] != 'x') && (size[i] != 'X'); i++)
+        s1 += size[i];
+    for (i+=1; i<size.length(); i++) 
+        s2 += size[i];
+    a = atoi(x1.c_str());
+    b = atoi(x2.c_str());
+    if (n == a) {
+        cout << "Введите элементы матрицы" << endl;
+        int **matrix2;
+        matrix2 = new int*[m];
+        for (i=0; i<a; i++)
+            matrix2[i] = new int[b];
+        for (i=0; i<a; i++)
+            for (j=0; j<b; j++)
+                cin >> matrix2[i][j];
+        int **matrix3;
+        matrix3 = new int*[m];
+        for (i=0; i<m; i++)
+            matrix3[i] = new int[b];
+        for (i=0; i<m; i++)
+            for (j=0; j<b; j++)
+                matrix3[i][j] = 0;
+        for (i=0; i<m; i++) {
+            for (j=0; j<b; j++) {
+                for (c=0; c<a; c++)
+                     matrix3[i][j] += matrix[i][c] * matrix2[c][j];
+	    }
+	}	
+        cout << "Результат:" << endl;
+        n = b;
+        for (i=0; i<a; i++)
+            delete[] matrix2[i];
+        delete[] matrix2;
+        for (i=0; i<m; i++)
+            delete[] matrix[i];
+        delete[] mstrix;
+        matrix = matrix3;
+        out(matrix, m, n);
+    }
+    else cout << "Неверный размер";
+}
+
+void tran(int**&matrix, int &m, int &n)
 {
     int i, j;
-    int **matrix2 = nullptr;
-    matrix2 = new int*[n];
+    int **matrix1 = nullptr;
+    matrix1 = new int*[n];
     for (i=0; i<n; i++)
-    matrix2[i] = new int[m];
+    matrix1[i] = new int[m];
     for (i=0; i<n; i++)
         for (j=0; j<m; j++)
-        matrix2[i][j] = matrix[j][i];
+        matrix1[i][j] = matrix[j][i];
         for (i=0; i<m; i++)
             delete[] matrix[i];
         delete[] matrix;
-    matrix = matrix2;
+    matrix = matrix1;
     swap (m, n);
 }
 
-void stf(int** matrix, int m, int n)
+void stf(int**matrix, int m, int n)
 {
     int i, j;
-    ofstream file ("matrix.txt");
+    ofstream file("matrix.txt");
     file << m << " " << n << endl;
-    for (i=0; i < m; i++){
-        for (j=0; j < n; j++)
+    for (i=0; i<m; i++){
+        for (j=0; j<n; j++)
         file << matrix[i][j] << " ";
         file << endl;
     }
@@ -118,7 +166,7 @@ void stf(int** matrix, int m, int n)
 }
 
 
-void lff(int**& matrix, int &m, int &n)
+void lff(int**&matrix, int &m, int &n)
 {
     int i, j;
     ifstream fin("matrix.txt");
@@ -154,16 +202,17 @@ int main (int argc, char* argv[]){
         menu();
         cin >> choise;
         switch (choise) {
-            case 1: out (matrix, m, n);
-            break;
-            case 2: add (matrix, m, n);
-            break;
-            case 5: stf (matrix, m, n);
-            break;
-	    case 6: lff (matrix, m, n);
-            break;
-            case 8:
-              return 0;
+            		case 1: out (matrix, m, n);
+            		break;
+            		case 2: add (matrix, m, n);
+           		break;
+            		case 5: stf (matrix, m, n);
+            		break;
+	    		case 6: lff (matrix, m, n);
+            		break;
+	    		case 8: delete[] matrix;		
+            		return 0;
+	    		default: cout << "Неверная команда" << endl; 	
         }
     }
 }
