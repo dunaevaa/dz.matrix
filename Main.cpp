@@ -97,8 +97,8 @@ void mul(int**&matrix, int m, int n)
         s1 += size[i];
     for (i+=1; i<size.length(); i++) 
         s2 += size[i];
-    a = atoi(x1.c_str());
-    b = atoi(x2.c_str());
+    a = atoi(s1.c_str());
+    b = atoi(s2.c_str());
     if (n == a) {
         cout << "Введите элементы матрицы" << endl;
         int **matrix2;
