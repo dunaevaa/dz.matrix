@@ -102,7 +102,7 @@ void mul(int**&matrix, int m, int n)
     if (n == a) {
         cout << "Введите элементы матрицы" << endl;
         int **matrix2;
-        matrix2 = new int*[m];
+        matrix2 = new int*[n];
         for (i=0; i<a; i++)
             matrix2[i] = new int[b];
         for (i=0; i<a; i++)
@@ -122,21 +122,20 @@ void mul(int**&matrix, int m, int n)
 	    }
 	}	
         cout << "Результат:" << endl;
-        n = b;
-        for (i=0; i<a; i++)
+        n = a;
+        for (i=0; i<b; i++)
             delete[] matrix2[i];
         delete[] matrix2;
         for (i=0; i<m; i++)
             delete[] matrix[i];
         delete[] mstrix;
         matrix = matrix3;
-        out(matrix, m, n);
+        cout << matrix[i][j] << endl;
     }
     else cout << "Неверный размер";
 }
 
-void tran(int**&matrix, int &m, int &n)
-{
+void tran(int**&matrix, int &m, int &n) {
     int i, j;
     int **matrix1 = nullptr;
     matrix1 = new int*[n];
@@ -188,12 +187,12 @@ void lff(int**&matrix, int &m, int &n)
     else cout << "Файл не найден";
 }
 
-int main (int argc, char* argv[]){
+int main (int argc, char* argv[]) {
     setlocale(LC_ALL, "Russian");
     int** matrix = nullptr;
     int m, n;
     int choise;
-    if (argc < 3){
+    if (argc < 3) {
     cout << "Hеверное количество элементов" << endl;
     return 0;
     }
@@ -202,13 +201,17 @@ int main (int argc, char* argv[]){
         menu();
         cin >> choise;
         switch (choise) {
-            		case 1: out (matrix, m, n);
+            		case 1: out(matrix, m, n);
             		break;
-            		case 2: add (matrix, m, n);
+            		case 2: add(matrix, m, n);
            		break;
-            		case 5: stf (matrix, m, n);
+		        case 3: mul(matrix, m, n);
+			break;
+			case 4: tran(matrix, m, n);
+			break;
+            		case 5: stf(matrix, m, n);
             		break;
-	    		case 6: lff (matrix, m, n);
+	    		case 6: lff(matrix, m, n);
             		break;
 	    		case 8: delete[] matrix;		
             		return 0;
