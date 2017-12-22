@@ -130,7 +130,7 @@ void mul(int**&matrix, int m, int n)
             delete[] matrix[i];
         delete[] mstrix;
         matrix = matrix3;
-        cout << matrix[i][j] << endl;
+        mul(matrix, m, n);
     }
     else cout << "Неверный размер";
 }
