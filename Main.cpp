@@ -130,7 +130,7 @@ void mul(int**&matrix, int m, int n)
             delete[] matrix[i];
         delete[] mstrix;
         matrix = matrix3;
-        mul(matrix, m, n);
+        out(matrix, m, n);
     }
     else cout << "Неверный размер";
 }
@@ -155,7 +155,7 @@ void stf(int**matrix, int m, int n)
 {
     int i, j;
     ofstream file("matrix.txt");
-    file << m << " " << n << endl;
+    file << m << "x" << n << endl;
     for (i=0; i<m; i++){
         for (j=0; j<n; j++)
         file << matrix[i][j] << " ";
@@ -171,7 +171,7 @@ void lff(int**&matrix, int &m, int &n)
     ifstream fin("matrix.txt");
     if (fin.is_open()) {
         fin >> m >> n;
-        if (mutrix != nullptr){
+        if (mutrix != nullptr) {
         for (int i=0; i<m; i++)
         delete [] matrix[i];
         delete [] matrix;
