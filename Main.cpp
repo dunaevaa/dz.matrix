@@ -102,22 +102,22 @@ void mul(int**&matrix, int m, int &n)
     if (n == a) {
         cout << "Введите элементы матрицы" << endl;
         int **matrix2;
-        matrix2 = new int*[n];
-        for (i=0; i<a; i++)
-            matrix2[i] = new int[b];
-        for (i=0; i<a; i++)
-            for (j=0; j<b; j++)
+        matrix2 = new int*[m];
+        for (i=0; i<b; i++)
+            matrix2[i] = new int[a];
+        for (i=0; i<b; i++)
+            for (j=0; j<a; j++)
                 cin >> matrix2[i][j];
         int **matrix3;
         matrix3 = new int*[m];
         for (i=0; i<m; i++)
-            matrix3[i] = new int[b];
+            matrix3[i] = new int[a];
         for (i=0; i<m; i++)
-            for (j=0; j<b; j++)
+            for (j=0; j<a; j++)
                 matrix3[i][j] = 0;
         for (i=0; i<m; i++) {
-            for (j=0; j<b; j++) {
-                for (c=0; c<a; c++)
+            for (j=0; j<a; j++) {
+                for (c=0; c<b; c++)
                      matrix3[i][j] += matrix[i][c] * matrix2[c][j];
 	    }
 	}	
@@ -187,6 +187,109 @@ void lff(int**&matrix, int &m, int &n)
     else cout << "Файл не найден";
 }
 
+void sort(int**&matrix, int &m, int &n) {
+    int x = 0;
+    int i, j;
+    cout << endl << "Введите порядок сортировки:" << endl;
+    cout << "1.Сортировка змейкой" << endl;
+    cout << "2.Сортировка улиткой" << endl;
+    cout << "3.Сортировка муравейчиком" << endl;
+    int *array = new int[m*n];
+    for (i = 0; i<m; i++)
+        for (j = 0; j<n; j++, x++)
+            array[x] = matrix[i][j];
+    for (i=0; i<m*n; i++)
+        for (j=0; j<m*n; j++)
+            if (array[i] < array[j])
+                swap(array[i], array[j]);
+    int choise;
+    cin >> choise;
+    switch (choise) {
+        case 1: {
+            	i=j=0;
+            	for (x=0; x<m*n; x++)
+                	switch(j%2) {
+                    		case 0: {
+                        		matrix[i][j] = array[x];
+                        		if (i != m-1)
+                          	    	   i++;
+                        		else
+                            	    	   j++;
+                        		break;
+                    		}
+				case 1: {
+                        		matrix[i][j] = array[x];
+                        		if (i != 0)
+                            		   i--;
+                        		else
+                            		   j++;
+                        		break;
+                    		}
+                	}
+        out(matrix);
+        break;
+        }
+        case 2: {
+            	i=j=0;
+            	int y = 0;
+            	for (x=0; x<m*n; x++) {
+                	if (i == y && j != n - 1 - y) {
+                    		matrix[i][j] = array[x];
+                    		j++;
+                    		continue;
+                	}
+                	if (i == y && j == n - 1 - y) {
+                    		matrix[i][j] = array[x];
+                    		i++;
+                    		continue;
+                	}
+                	if (j == n - 1 - y && i != m - 1 - y) {
+                    		matrix[i][j] = array[x];
+                    		i++;
+                    		continue;
+                	}
+                	if (j == n - 1 - y && i == m - 1 - y) {
+                    		matrix[i][j] = array[x];
+                    		j--;
+                    		continue;
+                	}
+                	if (i == m - 1 - y && j != y) {
+                    		matrix[i][j] = array[x];
+                    		j--;
+                    		continue;
+                	}
+                	if (i == m - 1 - y && j == y) {
+                    		matrix[i][j] = array[x];
+                    		i--;
+                    		continue;
+                	}
+                	if (j == y && i != y + 1) {
+                    		matrix[i][j] = array[x];
+                    		i--;
+                    		continue;
+                	}
+                	if (j == y && i == y + 1) {
+                    		matrix[i][j] = array[x];
+                    		j++;
+                    		y++;
+                    		continue;
+                	}
+            	}
+        out(matrix);
+        break;
+        }
+        case 3: {
+            	x = 0;
+                for (i=0; i<m; i++)
+                    for (j=0; j<n; j++, x++)
+                        matrix[i][j] = array[x];
+        out(matrix);
+        break;
+        }
+        default: return;
+    }
+}
+
 int main (int argc, char* argv[]) {
     setlocale(LC_ALL, "Russian");
     int** matrix = nullptr;
@@ -213,6 +316,8 @@ int main (int argc, char* argv[]) {
             		break;
 	    		case 6: lff(matrix, m, n);
             		break;
+		        case 7: sort(matrix, m, n);
+			break;
 	    		case 8: delete[] matrix;		
             		return 0;
 	    		default: cout << "Неверная команда" << endl; 	
