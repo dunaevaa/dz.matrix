@@ -191,42 +191,37 @@ void sort(int**&matrix, int &m, int &n) {
     int x = 0;
     int i, j;
     cout << endl << "Введите порядок сортировки:" << endl;
-    cout << "1.Сортировка змейкой" << endl;
-    cout << "2.Сортировка улиткой" << endl;
-    cout << "3.Сортировка муравейчиком" << endl;
+    cout << "s.Сортировка змейкой" << endl;
+    cout << "e.Сортировка улиткой" << endl;
+    cout << "a.Сортировка муравейчиком" << endl;
     int *array = new int[m*n];
-    for (i = 0; i<m; i++)
-        for (j = 0; j<n; j++, x++)
+    for (i=0; i<m; i++)
+        for (j=0; j<n; j++, x++)
             array[x] = matrix[i][j];
     for (i=0; i<m*n; i++)
-        for (j=0; j<m*n; j++)
-            if (array[i] < array[j])
+        for (j=i+1; j<m*n; j++)
+            if (array[i] > array[j])
                 swap(array[i], array[j]);
     int choise;
     cin >> choise;
     switch (choise) {
-        case 1: {
-            	i=j=0;
-            	for (x=0; x<m*n; x++)
-                	switch(j%2) {
-                    		case 0: {
-                        		matrix[i][j] = array[x];
-                        		if (i != m-1)
-                          	    	   i++;
-                        		else
-                            	    	   j++;
-                        		break;
-                    		}
-				case 1: {
-                        		matrix[i][j] = array[x];
-                        		if (i != 0)
-                            		   i--;
-                        		else
-                            		   j++;
-                        		break;
-                    		}
-                	}
-        out(matrix);
+        case 's': {
+            	for (i=0, x=0; i<n; i++)
+		    for (j=0; j<m; j++; x++)
+			 matrix[j][i] = array[x];
+		for (i=0; i<m/2; i++) {
+		    for (j=0; j<n; j++) {
+			 if (j%2 == 1) {
+			    swap(mattix[i][j], matrix[m-i-1][j]);
+			 }
+		    }
+		}
+		for (i=0; i<m; i++) {
+	            for (j=0; j<n; j++) {
+			 cout << matrix[i][j] << " ";
+		    }
+		    cout << endl;
+		}
         break;
         }
         case 2: {
@@ -278,15 +273,15 @@ void sort(int**&matrix, int &m, int &n) {
         out(matrix);
         break;
         }
-        case 3: {
-            	x = 0;
-                for (i=0; i<m; i++)
-                    for (j=0; j<n; j++, x++)
-                        matrix[i][j] = array[x];
-        out(matrix);
+        case 'a': {
+                for (i=0, x=0; i<m; i++) {
+                    for (j=0; j<n; j++, x++) {
+			    cout << array[x] << " ";
+		    }
+		    cout << endl;
+		}
         break;
         }
-        default: return;
     }
 }
 
