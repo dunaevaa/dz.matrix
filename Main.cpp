@@ -224,55 +224,62 @@ void sort(int**&matrix, int &m, int &n) {
 		}
         break;
         }
-        case 2: {
-            	i=j=0;
-            	int y = 0;
-            	for (x=0; x<m*n; x++) {
-                	if (i == y && j != n - 1 - y) {
-                    		matrix[i][j] = array[x];
-                    		j++;
-                    		continue;
-                	}
-                	if (i == y && j == n - 1 - y) {
-                    		matrix[i][j] = array[x];
-                    		i++;
-                    		continue;
-                	}
-                	if (j == n - 1 - y && i != m - 1 - y) {
-                    		matrix[i][j] = array[x];
-                    		i++;
-                    		continue;
-                	}
-                	if (j == n - 1 - y && i == m - 1 - y) {
-                    		matrix[i][j] = array[x];
-                    		j--;
-                    		continue;
-                	}
-                	if (i == m - 1 - y && j != y) {
-                    		matrix[i][j] = array[x];
-                    		j--;
-                    		continue;
-                	}
-                	if (i == m - 1 - y && j == y) {
-                    		matrix[i][j] = array[x];
-                    		i--;
-                    		continue;
-                	}
-                	if (j == y && i != y + 1) {
-                    		matrix[i][j] = array[x];
-                    		i--;
-                    		continue;
-                	}
-                	if (j == y && i == y + 1) {
-                    		matrix[i][j] = array[x];
-                    		j++;
-                    		y++;
-                    		continue;
-                	}
-            	}
-        out(matrix);
+	case 'e': {
+            	int a = m;
+            	int b = n;
+            	int k;
+            	int c = 0;
+            	int d = 0;
+            	int f = 0;
+            while (a > 0 && b > 0) {
+                if ((((a+b) * 2) - 4) > 0 && a > 1 && b > 1)
+                    k = (((a+b) * 2) - 4);
+                else if ((((a+b) * 2) - 4) > 0 && a == 1)
+                    k = b;
+                else if ((((a+b) * 2) - 4) > 0 && b == 1)
+                    k = a;
+                else if ((((a+b) * 2) - 4) == 0)
+                    k = 1;
+                for (int i=c, j=d, x=0; x<k; x++) {
+                    if (j < (n - 1) - d && i==c) {
+                        matrix[i][j] = array[f];                                     
+                        j++;
+                        f++; 
+		    }
+                    else if (i < (m - 1) - c && j == (n - 1) - d) {
+                        matrix[i][j] = array[f]; 
+                        i++;
+                        f++;
+		    }
+                    else if (j > d && i == (m - 1) - c) {
+                        matrix[i][j] = array[f];
+                        j--;
+                        f++;
+		    }
+                    else if (i > c && j == d) {
+                        matrix[i][j] = array[f];
+                        i--;
+                        f++;
+		    }
+                    else if (i == j && k == 1) {
+                        matrix[i][j] = array[f];
+                        j++;
+                        f++;
+		    }
+                }
+                c++;
+                d++;
+                a = a - 2;
+                b = b - 2;
+            }
+            for (i=0; i<m; i++) {
+                for (j=0; j<n; j++) {
+                    cout << matrix[i][j] << " ";
+                }
+                cout << endl;
+            }
         break;
-        }
+	}    
         case 'a': {
                 for (i=0, x=0; i<m; i++) {
                     for (j=0; j<n; j++, x++) {
