@@ -171,7 +171,7 @@ void lff(int**&matrix, int &m, int &n)
     ifstream fin("matrix.txt");
     if (fin.is_open()) {
         fin >> m >> n;
-        if (mutrix != nullptr) {
+        if (matrix != nullptr) {
         for (int i=0; i<m; i++)
         delete [] matrix[i];
         delete [] matrix;
