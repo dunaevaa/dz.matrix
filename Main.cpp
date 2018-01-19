@@ -87,7 +87,7 @@ void add(int**&matrix, int m, int n) {
     }
 }
 
-void mul(int**&matrix, int m, int &n)
+void mul(int**&matrix, int &m, int &n)
 {
     int i, j, a, b, c;
     string size, s1, s2;
